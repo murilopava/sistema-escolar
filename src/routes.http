@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/aluno/Roberto
+PUT http://localhost:3000/aluno/411f9b97-2b08-4862-bc5d-6ca0a724e829
 Content-Type: application/json
 
 {

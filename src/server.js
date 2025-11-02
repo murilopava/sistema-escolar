@@ -1,11 +1,13 @@
 import { fastify } from 'fastify'
 import { DatabaseAlunos } from './database/alunos-database.js'
+import { DatabaseAlunosFake } from './database/alunos-database-fake.js'
 
 const server = fastify()
 const dbAlunos = new DatabaseAlunos
+const dbAlunosFake = new DatabaseAlunosFake
 
 server.get('/alunos', async (request, reply) => {
-  const alunos = await dbAlunos.list()
+  const alunos = await dbAlunosFake.list()
 
   reply.status(200).send(alunos)
   return alunos
@@ -15,8 +17,9 @@ server.post('/aluno', (request, reply) => {
     
     const aluno = request.body
     
-    dbAlunos.create(aluno.nome, aluno.turma, aluno.notas, aluno.media)
+    dbAlunosFake.create(aluno.nome, aluno.turma, aluno.notas, aluno.media)
 
+    dbAlunosFake.findAll();
     return reply.status(201).send(request.body)
     
 })
@@ -30,12 +33,7 @@ server.put('/aluno/:aluno', (request, reply) => {
   if (alunoIndex !== -1) {
     // Atualiza o aluno existente
     alunos[alunoIndex] = { ...alunos[alunoIndex], turma, notas, media };
-    reply.status(202).send('Aluno atualizado com sucesso');
-  } else {
-    // Se não existir, adiciona novo
-    alunos.push({ aluno: nomeAluno, turma, notas, media });
-    reply.status(201).send('Novo aluno adicionado');
-  }
+
 
 
 })
