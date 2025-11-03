@@ -18,14 +18,16 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/aluno/411f9b97-2b08-4862-bc5d-6ca0a724e829
+PUT http://localhost:3000/aluno/7fadea4b-34ab-4bf0-b1d9-0749391e569a
 Content-Type: application/json
 
 {
-    "turma": "2Adf",
+    "nome": "Matheus",
+    "turma": "2A",
     "notas": [
         {"disciplina": "matemática", "nota": 8},
-        {"disciplina": "história", "nota": 9}
+        {"disciplina": "história", "nota": 9},
+        {"disciplina": "biologia", "nota": 6}
     ],
     "media": 8.5  
 }

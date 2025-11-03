@@ -17,7 +17,7 @@ server.post('/aluno', (request, reply) => {
     
     const aluno = request.body
     
-    dbAlunosFake.create(aluno.nome, aluno.turma, aluno.notas, aluno.media)
+    dbAlunosFake.create(aluno.nome, aluno.turma, aluno.notas)
 
     dbAlunosFake.findAll();
     return reply.status(201).send(request.body)
@@ -25,17 +25,10 @@ server.post('/aluno', (request, reply) => {
 })
 
 server.put('/aluno/:aluno', (request, reply) => {
-    const nomeAluno = request.params.aluno
-    const {turma, notas, media} = request.body
+    const id = request.params.aluno
+    const aluno = request.body
     
-    const alunoIndex = alunos.findIndex(a => a.nome === nomeAluno);
-
-  if (alunoIndex !== -1) {
-    // Atualiza o aluno existente
-    alunos[alunoIndex] = { ...alunos[alunoIndex], turma, notas, media };
-
-
-
+    dbAlunosFake.put(id, aluno.nome, aluno.turma, aluno.notas)
 })
 
 server.listen({
