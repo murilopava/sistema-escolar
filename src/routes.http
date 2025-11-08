@@ -1,4 +1,4 @@
-POST http://localhost:3000/alunos
+POST http://localhost:3000/alunos/cadastrar
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/alunos/a61d6c75-9177-4687-bc3f-200f0bbf5423
+PUT http://localhost:3000/alunos/atualizar/a61d6c75-9177-4687-bc3f-200f0bbf5423
 Content-Type: application/json
 
 {
@@ -32,4 +32,34 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/alunos/4b789bb2-b227-4964-84bd-e450582ff223
+DELETE http://localhost:3000/alunos/deletar/4b789bb2-b227-4964-84bd-e450582ff223
+
+###
+
+POST http://localhost:3000/professores/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Jefferson",
+    "turma": ["2B", "1A"],
+    "disciplina": ["matemática", "história"]
+}
+
+###
+
+GET http://localhost:3000/professores/
+
+###
+
+PUT http://localhost:3000/professores/atualizar/6a3e4539-c985-4ca2-8c1b-bbd29641126f
+Content-Type: application/json
+
+{
+    "nome": "Jason",
+    "turma": ["2A", "3B", "2B"],
+    "disciplina": ["biologia", "inglês", "química"]
+}
+
+###
+
+DELETE http://localhost:3000/professores/deletar/b84857a5-5aad-4824-b21d-61865cc456e0

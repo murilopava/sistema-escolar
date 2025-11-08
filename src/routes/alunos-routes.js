@@ -17,7 +17,7 @@ export async function alunosRoutes (server, dbAlunos) {
         
     })
 
-    server.put('/alunos/:id', async (request, reply) => {
+    server.put('/alunos/atualizar/:id', async (request, reply) => {
         const id = request.params.id
         const aluno = request.body
         
@@ -32,7 +32,7 @@ export async function alunosRoutes (server, dbAlunos) {
         })
     })
 
-    server.delete('/alunos/:id', async (request, reply) => {
+    server.delete('/alunos/deletar/:id', async (request, reply) => {
         const id = request.params.id
 
         const alunoDeletado = await dbAlunosFake.delete(id)
