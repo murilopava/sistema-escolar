@@ -1,6 +1,10 @@
-import { REPL_MODE_SLOPPY } from "repl"
-
 export async function professoresRoutes(server, dbProfessores) {
+
+    server.get('/professores', async (request, reply) => {
+        const professores = await dbProfessores.list()
+        reply.status(200).send(professores) 
+    })
+
     server.get('/professores/:id', async (request, reply) => {
         const id = request.params.id
         const professores = await dbProfessores.search(id)

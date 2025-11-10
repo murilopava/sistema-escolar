@@ -2,6 +2,10 @@ import { randomUUID } from 'crypto'
 import { sql } from './db.js'
 
 export class DatabaseProfessores {
+    async list() {
+        return await sql`SELECT * FROM professores`
+    }
+
     async create(professor) {
         const id = randomUUID()
 
@@ -10,13 +14,10 @@ export class DatabaseProfessores {
     }
 
     async search(id) {
-        if (id) {
-            const professor = await sql`SELECT * FROM professores WHERE id = ${id}`
-            if (professor.length === 0) {
-                return null;
-            }
-        }else {
-            return await sql`SELECT * FROM professores`
+        const professor = await sql`SELECT * FROM professores WHERE id = ${id}`
+
+        if (professor.length === 0) {
+             return null;
         }
 
         return professor
