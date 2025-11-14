@@ -31,20 +31,28 @@ export async function alunosRoutes (server, dbAlunos) {
     })
 
     server.post('/alunos/cadastrar', async (request, reply) => {    
-        
-        const aluno = request.body
-        
-        await dbAlunos.create(aluno)
+        try {
+            const aluno = request.body
+            validator.validarAluno(aluno)
+    
+            await dbAlunos.create(aluno)
+    
+            return reply.status(201).send({
+                message: 'Aluno novo cadastrado',
+                aluno: request.body})
 
-        return reply.status(201).send({
-            message: 'Aluno novo cadastrado',
-            aluno: request.body})
-    })
+        } catch (err) {
+            console.log('Erro ao cadastrar aluno, ', err)
+            reply.status(500).send({message: 'Erro no servidor interno'})
+        }})
 
     server.put('/alunos/atualizar/:id', async (request, reply) => {
         try {
             const id = request.params.id
+            validator.id(id)
+
             const aluno = request.body
+            validator.validarAluno(aluno)
             
             const alunoAtualizado = await dbAlunos.put(id, aluno.nome, aluno.turma, aluno.notas)
             if (!alunoAtualizado) {
@@ -64,6 +72,8 @@ export async function alunosRoutes (server, dbAlunos) {
     server.delete('/alunos/deletar/:id', async (request, reply) => {
         try {
             const id = request.params.id
+
+            validator.id(id)
     
             const alunoDeletado = await dbAlunos.delete(id)
     

@@ -29,12 +29,20 @@ export class validarEntrada {
     validarAluno({nome, turma, notas}) {
         const turmaValida = ['1A', '2A', '1B', '2B']
         
-        if (!nome, !turma) {
+        if (!nome.trim(), !turma.trim()) {
             throw new Error('Preencha todos os campos')
         }
 
-        if (!turma.includes(turma)) {
+        
+        if (!turmaValida.includes(turma)) {
             throw new Error('Turma inválida')
+        }
+        
+        for (let indice in notas) {
+            const entrada = notas[indice].trim() 
+            if (entrada === '' || isNaN(entrada) || entrada < 0 || entrada > 10) {
+                throw new Error('Nota inválida')
+            }
         }
     }
     
