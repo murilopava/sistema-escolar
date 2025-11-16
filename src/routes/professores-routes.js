@@ -28,7 +28,10 @@ export async function professoresRoutes(server, dbProfessores) {
             reply.status(200).send(professores)
         } catch (err) {
             console.log('Erro ao procurar id', err)
-            reply.status(500).send({message: 'Erro: ID não encontrado!'})
+            reply.status(500).send({
+                message: 'Erro ao encontrar professor',
+                Erro: err.message
+            })
         }
     })
 
@@ -46,7 +49,10 @@ export async function professoresRoutes(server, dbProfessores) {
 
         } catch (err) {
             console.error('Erro ao cadastrar professor:', err)
-            return reply.status(500).send({message: 'Erro interno no servidor'})
+            return reply.status(500).send({
+                message: 'Erro ao cadastrar professor',
+                Erro: err.message
+            })
         }
     })
 
@@ -72,7 +78,10 @@ export async function professoresRoutes(server, dbProfessores) {
             })
         } catch (err) {
             console.log('Erro ao atualizar: ', err)
-            reply.status(500).send({message: 'Erro no servidor interno'})
+            reply.status(500).send({
+                message: 'Erro ao atualizar professor',
+                Erro: err.message
+            })
         }
 
     })
@@ -92,7 +101,10 @@ export async function professoresRoutes(server, dbProfessores) {
                 professor: deletado[0]})
             } catch (err) {
                 console.log('Erro ao deletar: ', err)
-                reply.status(500).send({message: 'Erro no servidor interno'})
+                reply.status(500).send({
+                message: 'Erro ao deletar professor',
+                Erro: err.message
+            })
             }
     })
 }
